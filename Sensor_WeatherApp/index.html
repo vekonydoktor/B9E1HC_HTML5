@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Weather Application</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta property="og:url"                content="http://vikingcomp.hu/weather" />
+        <meta property="og:title"              content="vekonydoktor's WEATHER" />
+        <meta property="og:description"        content="Current weather and forecast data from all over the world with automatic localization." />
+        <meta property="og:image"              content="http://vikingcomp.hu/weather/Weather-banner.jpg" />
+
+
+
+
+        <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <!--script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"-->
+
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+
+        <link  rel="stylesheet" href="weather.css">
+
+        <script src="weather.js"></script>
+
+    </head>
+    <body>
+        <div id="fb-root"></div>
+        <script>(function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/hu_HU/sdk.js#xfbml=1&version=v2.8";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+        
+        <div id="loadingBox">
+            <img src="loading.gif" alt="loading" width="110"/>
+            <p>Loading...</p>
+        </div>
+
+        <div id="headerBox">
+            <form id="cityForm">
+                <input id="cityInput" type="text" placeholder="Address">
+                <input type="submit" value="Go">
+                <input type="button" onclick="LocateMe()" value="Locate Me!">
+            </form>
+
+            <span class="radio" id="radio-C" onclick="ChangeUnitClick('metric')">°C</span>
+            <span class="radio" id="radio-F" onclick="ChangeUnitClick('imperial')">°F</span>
+        </div>
+
+        <div id="facebookBox">
+            <div class="fb-like" data-href="http://vikingcomp.hu/weather" data-layout="box_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+        </div>
+
+        <div id="mainBox">
+            <div id="temperatureBox">
+                <span id="temperature"></span>
+                <span id="unit"></span>
+            </div>
+            <div id="description"></div>
+            <div id="location"></div>
+            <div id="forecastsBox" class="row box">
+                <div id="forecastsBox-header" class="box-header"><h2>Forecast:</h2></div>
+                <div class="forecastBox col-2-4">
+                    <div class="forecastBox-inner">
+                        <div class="forecast-img"></div>
+                        <div class="forecast-temp"></div>
+                        <div class="forecast-desc"></div>
+                        <div class="forecast-day"></div>
+                    </div>
+                </div>
+                <div class="forecastBox col-2-4">
+                    <div class="forecastBox-inner">
+                        <div class="forecast-img"></div>
+                        <div class="forecast-temp"></div>
+                        <div class="forecast-desc"></div>
+                        <div class="forecast-day"></div>
+                    </div>
+                </div>
+                <div class="forecastBox col-2-4">
+                    <div class="forecastBox-inner">
+                        <div class="forecast-img"></div>
+                        <div class="forecast-temp"></div>
+                        <div class="forecast-desc"></div>
+                        <div class="forecast-day"></div>
+                    </div>
+                </div>
+                <div class="forecastBox col-2-4">
+                    <div class="forecastBox-inner">
+                        <div class="forecast-img"></div>
+                        <div class="forecast-temp"></div>
+                        <div class="forecast-desc"></div>
+                        <div class="forecast-day"></div>    
+                    </div>
+                </div>
+                <div class="forecastBox col-2-4">
+                    <div class="forecastBox-inner">
+                        <div class="forecast-img"></div>
+                        <div class="forecast-temp"></div>
+                        <div class="forecast-desc"></div>
+                        <div class="forecast-day"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="todayBox" class="row box">
+                <div id="todayBox-header" class="box-header"><h2>Next 24 hours:</h2></div>
+                <div id="today-header" class="row">
+                    <div class="col-2">Time</div>
+                    <div class="col-2">Description</div>
+                    <div class="col-1">Temp.</div>
+                    <div class="col-2">Precipitation</div>    
+                    <div class="col-1">Humidity</div>
+                    <div class="col-1">Pressure</div>            
+                    <div class="col-1">Wind sp.</div>
+                    <div class="col-2">Wind deg.</div>
+                </div>
+                <div id="today-values" class="row">
+                    <div class="today-value row">
+                        <div class="col-2 today-time"></div>
+                        <div class="col-2 today-desc today-col-6"></div>
+                        <div class="col-1 today-temp today-col-6"></div>
+                        <div class="col-2 today-prec"></div>
+                        <div class="col-1 today-hum today-col-3"></div>
+                        <div class="col-1 today-pres today-col-3"></div>
+                        <div class="col-1 today-wsp today-col-3"></div>
+                        <div class="col-2 today-wdeg today-col-3"></div>
+                    </div>
+                </div>
+                <div id="locationBox" class="row box">
+                    <div id="locationBox-header" class="box-header col-3"><h2 style="padding: 0px;">Location info:</h2></div>
+                    <div class="col-1 invhelper">
+                        <div>Longitude:</div>
+                        <div>Latitude:</div>
+                        <div>Accuracy:</div>
+                    </div>
+                    <div class="col-2">
+                        <div id="location-lng"></div>
+                        <div id="location-lat"></div>
+                        <div id="location-acc"></div>
+                    </div>
+                    <div id="location-add" class="col-6"></div>
+                    <div class="col-12">
+                        <iframe id="location-map" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+
+                <div id="footer">
+                    <p>&copy made by: Vékony Péter - <a href="mailto:vekonydoktor@gmail.com">vekonydoktor@gmail.com</a></p>
+                </div>
+            </div>
+
+
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <div id="modal-close-container">
+                        <div id="modal-close">x</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <h2><span id="modal-day"></span></h2>
+                            <h3><span id="modal-desc"></span></h3>
+                        </div>
+                        <div class="col-4">
+                            <h4>Temperature</h4>
+                            <p>Min.: <span id="modal-min"></span></p>
+                            <p>Max.: <span id="modal-max"></span></p>
+                            <p>Avg. humidity: <span id="modal-hum"></span></p>
+                            <p id="modal-desc"></p>
+                        </div>
+                        <div class="col-4">
+                            <h4>Other</h4>
+                            <p>Avg. wind speed: <span id="modal-wind"></span></p>
+                            <p>Avg. pressure: <span id="modal-press"></span></p>
+                        </div>
+                    </div>
+                    <div id="modal-values" class='row'>
+                    </div>
+                </div>
+            </div>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,304 @@
+@font-face {
+    font-family: renogare;
+    src: url(Renogare.ttf) format('truetype'), url(Bebas.woff) format('woff');
+}
+
+body {
+    background-color: #4756ff;
+    font-family: renogare;
+    margin: 0px;
+}
+
+#loadingBox {
+    position: fixed;
+    top: 200px;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+}
+
+
+#headerBox {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    min-height: 40px;
+    background-color: #b5d0ff;
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.5);
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.radio {
+    background-color: #0044bc;
+    color: white;
+    float: right;
+    font-size: 0.7em;
+    width: 15px;
+    height: 15px;
+    padding: 5px;
+    border-radius: 50%;
+    margin-left: 5px;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: content-box;
+}
+
+.radio:hover {
+    background-color: #b5d0ff;
+}
+
+#cityForm {
+    float: left;
+    font-family: Arial;
+}
+
+#facebookBox {
+    position: fixed;
+    top: 100px;
+    left: 0px;
+    background-color: #b5d0ff;
+    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.5);
+    padding: 6px 10px;
+}
+
+#mainBox {
+    display: none;
+
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-top: 120px;
+    text-align: center;
+    color: white;
+}
+
+#temperature {
+    font-size: 5em;
+}
+
+#unit {
+    vertical-align: top;
+    font-size: 2em;
+}
+
+#description{
+    font-size: 1.7em;
+}
+
+.box {
+    margin-top: 70px;
+}
+
+.box-header {
+    margin-bottom: 20px;
+}
+
+.box-header > h2 {
+    text-align: left;
+    margin: 0px;
+    padding-left: 20px;
+    font-weight: normal;
+}
+
+.forecastBox {
+
+}
+
+.forecastBox-inner {
+    text-align: center;
+    background-color: #0044bc;
+    padding: 10px 6px 20px 6px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.forecastBox-inner:hover {
+    background-color: #4082ff;
+}
+
+.forecast-temp {
+}
+
+.forecast-desc {
+}
+
+.forecast-day {
+}
+
+.forecast-img {
+    width: 100%;
+    height: 120px;
+    background-image: url(icon_sun.png);
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+
+#today-header {
+    background-color: #001e8d;
+    display: none;
+}
+
+.today-value:nth-child(even) {
+    background-color: #476eff;
+}
+
+.today-time {
+    background-color: #0044bc;
+}
+
+#locationBox {
+    text-align: left;
+}
+
+.helper {display: inline;}
+.invhelper {display: none;}
+
+#location-map {
+    width: 100%;
+    min-height: 370px;
+    border: 0px;
+    margin:0px;
+    border-radius: 10px;
+}
+
+#footer {
+    margin-top: 100px;
+    background-color: #001e8d;
+    width: 100%;
+    height: 70px;
+    box-shadow: 0px -1px 5px 0px rgba(0,0,0,0.5);
+    text-align: center;
+    color: #ffffff;
+    padding-top: 15px;
+    font-size: 0.8em;
+}
+#footer > p > a{
+    color: #ffffff;
+}
+
+
+/*                   */
+/*       MODAL       */
+/*                   */
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    color: white;
+    background-color: #4756ff;
+    margin: 6% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%; /* Could be more or less, depending on screen size */
+    /*height: 50%;*/
+}
+
+#modal-img-container {
+    text-align: center;
+}
+
+#modal-img {
+    height: 200px;
+}
+
+#modal-values {
+
+}
+
+.modal-value-inner {
+    color: black;
+    text-align: center;
+    background-color: #b5d0ff;
+    padding: 10px 0px;
+    border-radius: 6px;
+}
+
+#modal-close-container {
+    height: 25px;
+}
+
+#modal-close {
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    margin: 0px;
+    padding: 0px;
+    width: 25px;
+    height:25px;
+    background-color: black;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-sizing: content-box;
+    float: right;
+}
+
+#modal-close:hover,
+#modal-close:focus {    
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px dashed white;
+}
+
+
+
+
+/*                   */
+/* RESPONSIVE DESIGN */
+/*                   */
+
+* {
+    box-sizing: border-box;
+}
+
+/* For mobile phones: */
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+    width: 100%;
+}
+
+.today-col-3 {width: 25%;}
+.today-col-4 {width: 33.33%;}
+.today-col-6 {width: 50%;}
+
+@media only screen and (min-width: 768px) {
+    .col-1 {width: 8.33%;}
+    .col-1-5 {width: 12.5%;}
+    .col-2 {width: 16.66%;}
+    .col-2-4 {width: 20%; }
+    .col-3 {width: 25%;}
+    .col-4 {width: 33.33%;}
+    .col-5 {width: 41.66%;}
+    .col-6 {width: 50%;}
+    .col-7 {width: 58.33%;}
+    .col-8 {width: 66.66%;}
+    .col-9 {width: 75%;}
+    .col-10 {width: 83.33%;}
+    .col-11 {width: 91.66%;}
+    .col-12 {width: 100%;}
+
+    .modal-content {width: 80%;}
+    .helper {display: none;}
+    .invhelper {display: inline;}
+    #today-header { display: block; }
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
